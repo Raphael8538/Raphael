@@ -1,5 +1,12 @@
 ﻿# CaptureOCR 설치: %LOCALAPPDATA%\CaptureOCR 에 복사하고 시작 메뉴·시작프로그램 바로가기를 만든다.
 $ErrorActionPreference = 'Stop'
+trap {
+    Write-Host ''
+    Write-Host "설치 중 오류가 발생했습니다: $_" -ForegroundColor Red
+    Write-Host "위치: $($_.InvocationInfo.PositionMessage)"
+    Read-Host 'Enter를 누르면 창이 닫힙니다'
+    exit 1
+}
 
 $src  = Split-Path -Parent $MyInvocation.MyCommand.Path
 $dest = Join-Path $env:LOCALAPPDATA 'CaptureOCR'
